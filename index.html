@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native vs. Calcite button performance</title>
+    <script type="module" src="/src/buttons.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Button rendering reproduction</p>
+          <h1>Native HTML vs. Calcite</h1>
+          <p>Render 2,000 buttons using either implementation.</p>
+        </div>
+
+        <div class="controls" aria-label="Button implementation">
+          <button id="render-native" type="button">Render native buttons</button>
+          <button id="render-calcite" type="button">Render Calcite buttons</button>
+        </div>
+      </header>
+
+      <section id="status" class="status" aria-live="polite">
+        Select a button implementation to begin.
+      </section>
+      <div id="button-container" class="button-container"></div>
+    </main>
+  </body>
+</html>

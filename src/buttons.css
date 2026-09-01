@@ -1,0 +1,16 @@
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.5rem;
+  align-items: stretch;
+  max-height: calc(100vh - 12rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--calcite-color-border-2);
+  background: var(--calcite-color-foreground-1);
+}
+
+.button-container > button,
+.button-container > calcite-button {
+  width: 100%;
+}

@@ -1,0 +1,118 @@
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--calcite-color-background);
+  color: var(--calcite-color-text-1);
+  font-family: var(--calcite-sans-family);
+}
+
+main {
+  box-sizing: border-box;
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 2rem;
+}
+
+header p {
+  margin: 0;
+}
+
+.eyebrow {
+  color: var(--calcite-color-text-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+button {
+  border: 1px solid var(--calcite-color-border-input);
+  border-radius: 2px;
+  background: var(--calcite-color-foreground-1);
+  color: var(--calcite-color-text-1);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.65rem 1rem;
+}
+
+button:hover,
+button.active {
+  border-color: var(--calcite-color-brand);
+  background: var(--calcite-color-brand);
+  color: var(--calcite-color-text-inverse);
+}
+
+.status {
+  min-height: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--calcite-color-text-2);
+}
+
+.table-container {
+  overflow: auto;
+  max-height: calc(100vh - 12rem);
+  border: 1px solid var(--calcite-color-border-2);
+  background: var(--calcite-color-foreground-1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--calcite-color-border-3);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background: var(--calcite-color-foreground-2);
+}
+
+calcite-table {
+  min-width: 100%;
+}
+
+@media (max-width: 760px) {
+  main {
+    padding: 1rem;
+  }
+
+  header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+}

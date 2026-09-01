@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcite component rendering performance</title>
+    <script type="module" src="/src/components.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Generic component rendering reproduction</p>
+          <h1>Calcite component renderer</h1>
+          <p>Select a component and append 2,000 configured instances to the DOM.</p>
+        </div>
+
+        <div class="controls component-controls">
+          <label for="component-select">Component</label>
+          <select id="component-select"></select>
+          <button id="render-components" type="button">Render components</button>
+        </div>
+      </header>
+
+      <section id="status" class="status" aria-live="polite">
+        Select a component to begin.
+      </section>
+      <div id="component-container" class="component-container"></div>
+    </main>
+  </body>
+</html>

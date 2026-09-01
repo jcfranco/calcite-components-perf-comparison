@@ -1,0 +1,17 @@
+{
+  "name": "calcite-table-performance",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
+  },
+  "dependencies": {
+    "@esri/calcite-components": "^5.1.2"
+  }
+}

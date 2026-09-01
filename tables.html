@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Native vs. Calcite table performance</title>
+    <script type="module" src="/src/tables.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Table rendering reproduction</p>
+          <h1>Native HTML vs. Calcite</h1>
+          <p>Render the same 1,200 rows and five columns using either implementation.</p>
+        </div>
+
+        <div class="controls" aria-label="Table implementation">
+          <button id="render-native" type="button">Render native table</button>
+          <button id="render-calcite" type="button">Render Calcite table</button>
+        </div>
+      </header>
+
+      <section id="status" class="status" aria-live="polite">
+        Select a table implementation to begin.
+      </section>
+      <div id="table-container" class="table-container"></div>
+    </main>
+  </body>
+</html>

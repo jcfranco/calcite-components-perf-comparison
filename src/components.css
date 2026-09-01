@@ -1,0 +1,29 @@
+.component-controls {
+  align-items: center;
+}
+
+.component-controls label {
+  font-weight: 600;
+}
+
+.component-controls select {
+  border: 1px solid var(--calcite-color-border-input);
+  border-radius: 2px;
+  background: var(--calcite-color-foreground-1);
+  color: var(--calcite-color-text-1);
+  font: inherit;
+  padding: 0.65rem 2rem 0.65rem 0.75rem;
+}
+
+.component-container {
+  max-height: calc(100vh - 12rem);
+  overflow: auto;
+  border: 1px solid var(--calcite-color-border-2);
+  background: var(--calcite-color-foreground-1);
+}
+
+@media (max-width: 760px) {
+  .component-controls {
+    align-items: stretch;
+  }
+}
