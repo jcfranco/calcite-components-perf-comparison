@@ -1,0 +1,96 @@
+.benchmark-controls {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--calcite-color-border-2);
+  background: var(--calcite-color-foreground-1);
+}
+
+.benchmark-controls label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--calcite-color-text-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.benchmark-controls input {
+  box-sizing: border-box;
+  width: 7rem;
+  border: 1px solid var(--calcite-color-border-input);
+  background: var(--calcite-color-foreground-1);
+  color: var(--calcite-color-text-1);
+  font: inherit;
+  padding: 0.6rem;
+}
+
+.results {
+  margin: 1.5rem 0;
+}
+
+.results h2 {
+  margin-bottom: 0.75rem;
+}
+
+.empty-result {
+  padding: 2rem;
+  border: 1px dashed var(--calcite-color-border-2);
+  color: var(--calcite-color-text-2);
+  text-align: center;
+}
+
+.build-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.result-table {
+  max-height: none;
+}
+
+.improvement {
+  color: var(--calcite-color-status-success);
+  font-weight: 600;
+}
+
+.regression {
+  color: var(--calcite-color-status-danger);
+  font-weight: 600;
+}
+
+details {
+  color: var(--calcite-color-text-2);
+}
+
+.runner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.runner-grid iframe {
+  width: 100%;
+  height: 32rem;
+  border: 1px solid var(--calcite-color-border-2);
+}
+
+@media (max-width: 760px) {
+  .benchmark-controls,
+  .runner-grid {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .benchmark-controls {
+    flex-direction: column;
+  }
+
+  .benchmark-controls label,
+  .benchmark-controls input {
+    width: 100%;
+  }
+}

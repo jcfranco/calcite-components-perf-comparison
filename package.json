@@ -5,7 +5,13 @@
   "type": "module",
   "scripts": {
     "start": "vite",
+    "start:local": "CALCITE_BUILD=local vite --port 4174",
+    "start:latest": "CALCITE_BUILD=latest vite --port 4173",
+    "compare": "node scripts/compare.js",
+    "setup:latest": "npm install --prefix .benchmark/latest --no-save @esri/calcite-components@latest",
     "build": "vite build",
+    "build:local": "CALCITE_BUILD=local vite build --outDir dist/local",
+    "build:latest": "CALCITE_BUILD=latest vite build --outDir dist/latest",
     "preview": "vite preview"
   },
   "devDependencies": {

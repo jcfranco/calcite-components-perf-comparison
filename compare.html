@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcite table build comparison</title>
+    <script type="module" src="/src/compare.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Calcite table benchmark</p>
+          <h1>Latest vs. local build</h1>
+          <p>Run identical table workloads in isolated browser contexts.</p>
+        </div>
+      </header>
+
+      <section class="benchmark-controls" aria-label="Benchmark configuration">
+        <label>
+          Rows
+          <input id="row-count" type="number" min="1" max="5000" step="100" value="1200">
+        </label>
+        <label>
+          Samples
+          <input id="sample-count" type="number" min="3" max="30" value="7">
+        </label>
+        <label>
+          Warmups
+          <input id="warmup-count" type="number" min="0" max="10" value="1">
+        </label>
+        <button id="run-comparison" type="button" disabled>Loading runners...</button>
+        <button id="copy-results" type="button" disabled>Copy JSON</button>
+      </section>
+
+      <section id="status" class="status" aria-live="polite">Starting benchmark runners...</section>
+
+      <section class="results" aria-labelledby="results-heading">
+        <h2 id="results-heading">Results</h2>
+        <div id="result-summary" class="empty-result">
+          Run the benchmark to compare the builds.
+        </div>
+      </section>
+
+      <details open>
+        <summary>Benchmark runners</summary>
+        <div class="runner-grid">
+          <iframe id="latest-runner" title="Latest Calcite benchmark runner"></iframe>
+          <iframe id="local-runner" title="Local Calcite benchmark runner"></iframe>
+        </div>
+      </details>
+    </main>
+  </body>
+</html>
