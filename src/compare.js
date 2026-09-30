@@ -2,14 +2,16 @@ import "@esri/calcite-components/main.css";
 import "./styles.css";
 import "./compare.css";
 
+const TARGET_BUILD = __CALCITE_COMPARE_TARGET__;
+
 const RUNNERS = {
   latest: {
     frame: document.querySelector("#latest-runner"),
     origin: "http://127.0.0.1:4173",
     ready: false
   },
-  local: {
-    frame: document.querySelector("#local-runner"),
+  [TARGET_BUILD]: {
+    frame: document.querySelector("#target-runner"),
     origin: "http://127.0.0.1:4174",
     ready: false
   }
@@ -23,6 +25,8 @@ const copyButton = document.querySelector("#copy-results");
 const status = document.querySelector("#status");
 const summary = document.querySelector("#result-summary");
 const runnerPanel = document.querySelector("details");
+document.querySelector("#comparison-heading").textContent =
+  `Latest vs. ${formatBuildName(TARGET_BUILD).toLowerCase()} build`;
 let lastReport;
 let requestId = 0;
 
@@ -46,12 +50,13 @@ function handleRunnerMessage(event) {
   const [name, runner] = entry;
   runner.ready = true;
   runner.build = event.data.build;
+  runner.label = formatBuildName(name);
 
   if (Object.values(RUNNERS).every(({ ready }) => ready)) {
     runButton.disabled = false;
     runButton.textContent = "Run comparison";
     status.textContent =
-      `Ready: latest ${RUNNERS.latest.build.version} and local ${RUNNERS.local.build.version}.`;
+      `Ready: latest ${RUNNERS.latest.build.version} and ${RUNNERS[TARGET_BUILD].label.toLowerCase()} ${RUNNERS[TARGET_BUILD].build.version}.`;
   } else {
     status.textContent = `${name} runner ready; waiting for the other build...`;
   }
@@ -63,7 +68,7 @@ async function runComparison() {
     samples: clampInput(sampleCountInput),
     warmups: clampInput(warmupCountInput)
   };
-  const order = Math.random() < 0.5 ? ["latest", "local"] : ["local", "latest"];
+  const order = Math.random() < 0.5 ? ["latest", TARGET_BUILD] : [TARGET_BUILD, "latest"];
   const results = {};
 
   runnerPanel.open = true;
@@ -140,21 +145,23 @@ function renderResults(report) {
     ["paint", "Two-frame total"]
   ];
   const latest = report.results.latest;
-  const local = report.results.local;
+  const target = report.results[TARGET_BUILD];
+  const latestLabel = RUNNERS.latest.label;
+  const targetLabel = RUNNERS[TARGET_BUILD].label;
   const rows = metrics
     .map(([key, label]) => {
       const latestMedian = latest.summary[key].median;
-      const localMedian = local.summary[key].median;
-      const delta = ((localMedian - latestMedian) / latestMedian) * 100;
+      const targetMedian = target.summary[key].median;
+      const delta = ((targetMedian - latestMedian) / latestMedian) * 100;
       const deltaClass = delta < 0 ? "improvement" : delta > 0 ? "regression" : "";
 
       return `
         <tr>
           <th scope="row">${label}</th>
           <td>${formatMs(latestMedian)}</td>
-          <td>${formatMs(localMedian)}</td>
+          <td>${formatMs(targetMedian)}</td>
           <td class="${deltaClass}">${formatDelta(delta)}</td>
-          <td>${formatMs(latest.summary[key].p95)} / ${formatMs(local.summary[key].p95)}</td>
+          <td>${formatMs(latest.summary[key].p95)} / ${formatMs(target.summary[key].p95)}</td>
         </tr>
       `;
     })
@@ -163,8 +170,8 @@ function renderResults(report) {
   summary.className = "";
   summary.innerHTML = `
     <div class="build-labels">
-      <span><strong>Latest:</strong> ${latest.build.version}</span>
-      <span><strong>Local:</strong> ${local.build.version}</span>
+      <span><strong>${latestLabel}:</strong> ${latest.build.version}</span>
+      <span><strong>${targetLabel}:</strong> ${target.build.version}</span>
       <span>${report.options.rows.toLocaleString()} rows, ${report.options.samples} samples</span>
     </div>
     <div class="table-container result-table">
@@ -172,10 +179,10 @@ function renderResults(report) {
         <thead>
           <tr>
             <th>Metric</th>
-            <th>Latest median</th>
-            <th>Local median</th>
-            <th>Local delta</th>
-            <th>p95 latest / local</th>
+            <th>${latestLabel} median</th>
+            <th>${targetLabel} median</th>
+            <th>${targetLabel} delta</th>
+            <th>p95 ${latestLabel.toLowerCase()} / ${targetLabel.toLowerCase()}</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -219,4 +226,8 @@ function formatMs(value) {
 function formatDelta(value) {
   const sign = value > 0 ? "+" : "";
   return `${sign}${value.toFixed(1)}%`;
+}
+
+function formatBuildName(name) {
+  return name === "latest" ? "Latest" : name === "next" ? "Next" : "Local";
 }
